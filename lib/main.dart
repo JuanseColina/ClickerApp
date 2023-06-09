@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: Colors.purple,
       ),
-      home: const CounterScreen()
+      home: const CounterFunctionsScreen()
     );
   }
 }

@@ -1,29 +1,67 @@
 import 'package:flutter/material.dart';
 
-class CounterScreen extends StatelessWidget {
-  const CounterScreen({super.key});
+class CounterFunctionsScreen extends StatefulWidget {
+  const CounterFunctionsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-  return  Scaffold(
-    appBar: AppBar(
-      title: const Text('Counter'),
-    ),
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          const Text('10',style: TextStyle(fontSize: 160, fontWeight: FontWeight.w100)),
-          const Text('Clicks',style: TextStyle(fontSize: 25))
-        ],
-      ),
-      ),
-        floatingActionButton: FloatingActionButton(
-          onPressed:  () {
+  State<CounterFunctionsScreen> createState() => _CounterFunctionsScreenState();
+}
 
-           },
-          child: const Icon(Icons.plus_one),
+class _CounterFunctionsScreenState extends State<CounterFunctionsScreen> {
+  int clickCounter = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Counter Functions'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh_rounded),
+              onPressed: () {
+                setState(() {
+                  clickCounter = 0;
+                });
+              },
+            ),
+          ],
         ),
-  );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('$clickCounter',
+                  style: TextStyle(fontSize: 160, fontWeight: FontWeight.w100)),
+              Text('Click${clickCounter == 1 ? '' : 's'}',
+                  style: TextStyle(fontSize: 25))
+            ],
+          ),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            CustomButton(icon: Icons.refresh_rounded),
+            const SizedBox(height: 10),
+            CustomButton(icon: Icons.exposure_minus_1),
+            const SizedBox(height: 10),
+            CustomButton(icon: Icons.plus_one),
+          ],
+        ));
+  }
+
+  class CustomButton extends StatelessWidget {
+
+    final IconData icon;
+
+  const CustomButton({
+  super.key,
+  required this.icon,
+  });
+  @override
+  FloatingActionButton CustomButton() {
+    return FloatingActionButton(
+            shape: const StadiumBorder(),
+            onPressed: () {},
+            child: const Icon(icon),
+          );
   }
 }
